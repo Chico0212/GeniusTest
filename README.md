@@ -1,226 +1,226 @@
-# Multi-Agent Calculator Project
+# Projeto Multi-Agente Calculadora
 
-A comprehensive Python project featuring a calculator with CLI interface, automated test generation using AI agents, and quality benchmarking tools.
+Um projeto Python abrangente com calculadora, interface CLI, geração automatizada de testes usando agentes de IA e ferramentas de análise de qualidade.
 
-## 📋 Table of Contents
+## 📋 Índice
 
-- [Project Structure](#project-structure)
-- [Quick Start](#quick-start)
-- [Setup & Installation](#setup--installation)
-- [Calculator Usage](#calculator-usage)
-- [GeniusTest - AI Test Generator](#geniustest---ai-test-generator)
-- [Benchmark - Quality Analysis](#benchmark---quality-analysis)
-- [Development Workflow](#development-workflow)
-- [Configuration](#configuration)
-- [Troubleshooting](#troubleshooting)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Início Rápido](#início-rápido)
+- [Configuração e Instalação](#configuração-e-instalação)
+- [Uso da Calculadora](#uso-da-calculadora)
+- [GeniusTest - Gerador de Testes com IA](#geniustest---gerador-de-testes-com-ia)
+- [Benchmark - Análise de Qualidade](#benchmark---análise-de-qualidade)
+- [Fluxo de Desenvolvimento](#fluxo-de-desenvolvimento)
+- [Configuração](#configuração)
+- [Solução de Problemas](#solução-de-problemas)
 
-## 🏗️ Project Structure
+## 🏗️ Estrutura do Projeto
 
 ```
 multi_agents/
-├── calculator/                 # Main calculator project
-│   ├── src/calculator/        # Source code
-│   │   ├── calculator.py      # Core calculator logic
-│   │   ├── cli.py            # Command-line interface
-│   │   └── main.py           # Application entry point
-│   ├── tests/                # Test files
+├── calculator/                 # Projeto principal da calculadora
+│   ├── src/calculator/        # Código fonte
+│   │   ├── calculator.py      # Lógica principal da calculadora
+│   │   ├── cli.py            # Interface de linha de comando
+│   │   └── main.py           # Ponto de entrada da aplicação
+│   ├── tests/                # Arquivos de teste
 │   │   ├── test_calculator.py
 │   │   ├── test_cli.py
 │   │   └── test_main.py
-│   └── pyproject.toml        # Project dependencies
-├── geniustest.py             # AI-powered test generator
-├── benchmark.py              # Quality & coverage analyzer
-├── .env                      # Environment variables
-└── README.md                 # This file
+│   └── pyproject.toml        # Dependências do projeto
+├── geniustest.py             # Gerador de testes com IA
+├── benchmark.py              # Analisador de qualidade e cobertura
+├── .env                      # Variáveis de ambiente
+└── README.md                 # Este arquivo
 ```
 
-## 🚀 Quick Start
+## 🚀 Início Rápido
 
-1. **Clone and setup:**
+1. **Clone e configuração:**
 ```bash
-git clone <your-repo>
+git clone <seu-repositorio>
 cd multi_agents
 ```
 
-2. **Setup environment:**
+2. **Configurar ambiente:**
 ```bash
 uv sync
-echo "GOOGLE_API_KEY=your_api_key_here" > .env
+echo "GOOGLE_API_KEY=sua_chave_api_aqui" > .env
 ```
 
-3. **Run calculator:**
+3. **Executar calculadora:**
 ```bash
 cd calculator
 uv run calc add 5 3
 ```
 
-4. **Generate tests:**
+4. **Gerar testes:**
 ```bash
 uv run python ../geniustest.py --directory ./calculator/src --write-files
 ```
 
-5. **Run benchmark:**
+5. **Executar benchmark:**
 ```bash
 cd calculator
 uv run python ../benchmark.py
 ```
 
-## 🛠️ Setup & Installation
+## 🛠️ Configuração e Instalação
 
-### Prerequisites
+### Pré-requisitos
 
 - Python 3.12+
-- [uv](https://docs.astral.sh/uv/) package manager
-- Google Gemini API key
+- Gerenciador de pacotes [uv](https://docs.astral.sh/uv/)
+- Chave API do Google Gemini
 
-### Installation Steps
+### Passos de Instalação
 
-1. **Install uv** (if not already installed):
+1. **Instalar uv** (se ainda não instalado):
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-2. **Initialize the project:**
+2. **Inicializar o projeto:**
 ```bash
 cd multi_agents
 uv sync
 ```
 
-3. **Configure environment variables:**
+3. **Configurar variáveis de ambiente:**
 ```bash
-# Create .env file with your Google API key
-echo "GOOGLE_API_KEY=your_actual_api_key_here" > .env
+# Criar arquivo .env com sua chave API do Google
+echo "GOOGLE_API_KEY=sua_chave_api_real_aqui" > .env
 ```
 
-4. **Install calculator as package:**
+4. **Instalar calculadora como pacote:**
 ```bash
 cd calculator
 uv pip install -e .
 ```
 
-5. **Verify installation:**
+5. **Verificar instalação:**
 ```bash
 uv run calc --help
 ```
 
-## 🧮 Calculator Usage
+## 🧮 Uso da Calculadora
 
-The calculator provides a CLI interface for mathematical operations with history tracking.
+A calculadora fornece uma interface CLI para operações matemáticas com rastreamento de histórico.
 
-### Basic Operations
+### Operações Básicas
 
 ```bash
 cd calculator
 
-# Addition
+# Adição
 uv run calc add 5 3
-# Result: 8.0
+# Resultado: 8.0
 
-# Subtraction  
+# Subtração
 uv run calc subtract 10 4
-# Result: 6.0
+# Resultado: 6.0
 
-# Multiplication
+# Multiplicação
 uv run calc multiply 6 7
-# Result: 42.0
+# Resultado: 42.0
 
-# Division
+# Divisão
 uv run calc divide 15 3
-# Result: 5.0
+# Resultado: 5.0
 
-# Power
+# Potenciação
 uv run calc power 2 8
-# Result: 256.0
+# Resultado: 256.0
 ```
 
-### Advanced Features
+### Recursos Avançados
 
-**Working with negative numbers:**
+**Trabalhando com números negativos:**
 ```bash
-# Use -- to separate negative numbers from options
+# Use -- para separar números negativos das opções
 uv run calc add -- -5 -3
-# Result: -8.0
+# Resultado: -8.0
 
 uv run calc subtract -- 5 -3
-# Result: 8.0
+# Resultado: 8.0
 ```
 
-**History management:**
+**Gerenciamento de histórico:**
 ```bash
-# View calculation history
+# Ver histórico de cálculos
 uv run calc history
 
-# Clear history
+# Limpar histórico
 uv run calc clear
 ```
 
-### Python API Usage
+### Uso da API Python
 
 ```python
 from calculator.calculator import Calculator
 
 calc = Calculator()
 result = calc.add(5, 3)
-print(f"Result: {result}")
-print(f"History: {calc.get_history()}")
+print(f"Resultado: {result}")
+print(f"Histórico: {calc.get_history()}")
 ```
 
-## 🤖 GeniusTest - AI Test Generator
+## 🤖 GeniusTest - Gerador de Testes com IA
 
-GeniusTest is a multi-agent system that automatically generates comprehensive unit tests for Python code using AI.
+GeniusTest é um sistema multi-agente que gera automaticamente testes unitários abrangentes para código Python usando IA.
 
-### Features
+### Funcionalidades
 
-- **Multi-agent analysis**: Code analyzer, test generator, pattern specialist, quality evaluator
-- **Real functional tests**: Generates executable tests, not just examples
-- **Comprehensive coverage**: Tests success cases, errors, and edge cases
-- **Multiple output formats**: Console display or file generation
+- **Análise multi-agente**: Analisador de código, gerador de testes, especialista em padrões, avaliador de qualidade
+- **Testes funcionais reais**: Gera testes executáveis, não apenas exemplos
+- **Cobertura abrangente**: Testa casos de sucesso, erros e casos extremos
+- **Múltiplos formatos de saída**: Exibição no console ou geração de arquivos
 
-### Usage Examples
+### Exemplos de Uso
 
-**Analyze and display tests for a single file:**
+**Analisar e exibir testes para um único arquivo:**
 ```bash
 uv run python geniustest.py --file ./calculator/src/calculator/calculator.py
 ```
 
-**Generate test files for entire directory:**
+**Gerar arquivos de teste para diretório inteiro:**
 ```bash
 uv run python geniustest.py --directory ./calculator/src --write-files --output ./calculator/tests_generated
 ```
 
-**Process with custom output directory:**
+**Processar com diretório de saída personalizado:**
 ```bash
-uv run python geniustest.py --directory ./my_project --write-files --output ./my_tests
+uv run python geniustest.py --directory ./meu_projeto --write-files --output ./meus_testes
 ```
 
-**Run with example code:**
+**Executar com código de exemplo:**
 ```bash
 uv run python geniustest.py
 ```
 
-### Command Line Options
+### Opções da Linha de Comando
 
 ```bash
 uv run python geniustest.py --help
 
-Options:
-  -d, --directory TEXT    Directory path to scan for Python files
-  -f, --file TEXT        Single Python file to process  
-  -o, --output TEXT      Output directory for generated test files (default: tests)
-  -w, --write-files      Write generated tests to files
-  --example              Run with example code
+Opções:
+  -d, --directory TEXT    Caminho do diretório para escanear arquivos Python
+  -f, --file TEXT        Arquivo Python único para processar
+  -o, --output TEXT      Diretório de saída para arquivos de teste gerados (padrão: tests)
+  -w, --write-files      Escrever testes gerados em arquivos
+  --example              Executar com código de exemplo
 ```
 
-### Generated Test Structure
+### Estrutura dos Testes Gerados
 
-GeniusTest generates tests following this structure:
+GeniusTest gera testes seguindo esta estrutura:
 
 ```python
 import unittest
 import sys
 import os
 
-# Path setup for imports
+# Configuração de caminho para imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from calculator.calculator import Calculator
@@ -246,127 +246,127 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-## 📊 Benchmark - Quality Analysis
+## 📊 Benchmark - Análise de Qualidade
 
-The benchmark script provides comprehensive analysis of test coverage and quality metrics.
+O script de benchmark fornece análise abrangente de cobertura de testes e métricas de qualidade.
 
-### Features
+### Funcionalidades
 
-- **Coverage Analysis**: Line and branch coverage using pytest-cov
-- **Test Quality Metrics**: Test density, assertion quality, best practices
-- **Quality Scoring**: Overall score (0-100) with letter grades
-- **Multiple Output Formats**: Text reports and JSON data
+- **Análise de Cobertura**: Cobertura de linha e branch usando pytest-cov
+- **Métricas de Qualidade de Testes**: Densidade de testes, qualidade de assertions, melhores práticas
+- **Pontuação de Qualidade**: Pontuação geral (0-100) com notas por letras
+- **Múltiplos Formatos de Saída**: Relatórios em texto e dados JSON
 
-### Usage Examples
+### Exemplos de Uso
 
-**Basic benchmark analysis:**
+**Análise básica de benchmark:**
 ```bash
 cd calculator
 uv run python ../benchmark.py
 ```
 
-**Generate report file:**
+**Gerar arquivo de relatório:**
 ```bash
 cd calculator
-uv run python ../benchmark.py --output benchmark_report.txt
+uv run python ../benchmark.py --output relatorio_benchmark.txt
 ```
 
-**JSON output for CI/CD:**
+**Saída JSON para CI/CD:**
 ```bash
 cd calculator
-uv run python ../benchmark.py --json --output results.json
+uv run python ../benchmark.py --json --output resultados.json
 ```
 
-**Custom project paths:**
+**Caminhos de projeto personalizados:**
 ```bash
-uv run python benchmark.py --project ./my_project --tests my_tests --source my_src
+uv run python benchmark.py --project ./meu_projeto --tests meus_testes --source meu_src
 ```
 
-### Command Line Options
+### Opções da Linha de Comando
 
 ```bash
 uv run python benchmark.py --help
 
-Options:
-  -p, --project TEXT     Project directory path (default: .)
-  -t, --tests TEXT       Tests directory path (default: tests)  
-  -s, --source TEXT      Source code directory (default: src)
-  -o, --output TEXT      Output report file
-  --json                 Output results as JSON
+Opções:
+  -p, --project TEXT     Caminho do diretório do projeto (padrão: .)
+  -t, --tests TEXT       Caminho do diretório de testes (padrão: tests)
+  -s, --source TEXT      Diretório do código fonte (padrão: src)
+  -o, --output TEXT      Arquivo de relatório de saída
+  --json                 Gerar resultados em formato JSON
 ```
 
-### Sample Benchmark Report
+### Exemplo de Relatório de Benchmark
 
 ```
-# Test Quality and Coverage Benchmark Report
-Generated: 2025-08-13 22:15:23
-Project: calculator
+# Relatório de Benchmark de Qualidade e Cobertura de Testes
+Gerado em: 2025-08-13 22:15:23
+Projeto: calculator
 
-## Overall Quality Score: 85.42/100 (Grade: B)
+## Pontuação Geral de Qualidade: 85.42/100 (Nota: B)
 
-### Coverage Analysis
-- Line Coverage: 94.94%
-- Branch Coverage: 87.50%
-- Coverage Score: 94.94/100
+### Análise de Cobertura
+- Cobertura de Linha: 94.94%
+- Cobertura de Branch: 87.50%
+- Pontuação de Cobertura: 94.94/100
 
-### Test Quality Metrics
-- Total Test Files: 3
-- Total Test Methods: 44
-- Total Assertions: 92
-- Avg Assertions per Test: 2.09
-- Setup/Teardown Methods: 3
-- Mock Usage: 8
-- Parameterized Tests: 0
+### Métricas de Qualidade de Testes
+- Total de Arquivos de Teste: 3
+- Total de Métodos de Teste: 44
+- Total de Assertions: 92
+- Média de Assertions por Teste: 2.09
+- Métodos Setup/Teardown: 3
+- Uso de Mock: 8
+- Testes Parametrizados: 0
 
-### Quality Scores Breakdown
-- Test Density Score: 100/100
-- Assertion Quality Score: 41.82/100
-- Best Practices Score: 59.09/100
+### Detalhamento das Pontuações de Qualidade
+- Pontuação de Densidade de Testes: 100/100
+- Pontuação de Qualidade de Assertions: 41.82/100
+- Pontuação de Melhores Práticas: 59.09/100
 
-### File-by-File Coverage
-- calculator.py: 100.0% lines
-- cli.py: 97.7% lines
-- main.py: 0.0% lines
+### Cobertura Arquivo por Arquivo
+- calculator.py: 100.0% linhas
+- cli.py: 97.7% linhas
+- main.py: 0.0% linhas
 
-✅ Coverage analysis completed successfully
+✅ Análise de cobertura concluída com sucesso
 ```
 
-## 🔧 Development Workflow
+## 🔧 Fluxo de Desenvolvimento
 
-### Running Tests
+### Executando Testes
 
 ```bash
 cd calculator
 
-# Run all tests
+# Executar todos os testes
 uv run pytest
 
-# Run with coverage
+# Executar com cobertura
 uv run pytest --cov=src/calculator --cov-report=html
 
-# Run specific test file
+# Executar arquivo de teste específico
 uv run pytest tests/test_calculator.py
 
-# Run with verbose output
+# Executar com saída verbosa
 uv run pytest -v
 ```
 
-### Code Quality Checks
+### Verificações de Qualidade de Código
 
 ```bash
 cd calculator
 
-# Run benchmark analysis
+# Executar análise de benchmark
 uv run python ../benchmark.py
 
-# Generate coverage report
+# Gerar relatório de cobertura
 uv run pytest --cov=src/calculator --cov-report=html
-open htmlcov/index.html  # View in browser
+open htmlcov/index.html  # Visualizar no navegador
 ```
 
-### Continuous Integration
+### Integração Contínua
 
-Example GitHub Actions workflow:
+Exemplo de workflow do GitHub Actions:
 
 ```yaml
 name: CI
@@ -379,38 +379,38 @@ jobs:
     - uses: actions/checkout@v4
     - uses: astral-sh/setup-uv@v1
     
-    - name: Install dependencies
+    - name: Instalar dependências
       run: uv sync
       
-    - name: Run tests
+    - name: Executar testes
       run: |
         cd calculator
         uv run pytest --cov=src/calculator --cov-report=xml
         
-    - name: Run benchmark
+    - name: Executar benchmark
       run: |
         cd calculator  
         uv run python ../benchmark.py --json --output benchmark.json
 ```
 
-## ⚙️ Configuration
+## ⚙️ Configuração
 
-### Environment Variables
+### Variáveis de Ambiente
 
-Create a `.env` file in the project root:
+Criar um arquivo `.env` na raiz do projeto:
 
 ```env
-# Required for GeniusTest AI features
-GOOGLE_API_KEY=your_google_api_key_here
+# Necessário para recursos de IA do GeniusTest
+GOOGLE_API_KEY=sua_chave_api_google_aqui
 
-# Optional: Custom model settings
+# Opcional: Configurações de modelo personalizado
 GEMINI_MODEL=gemini-2.0-flash
 TEMPERATURE=0.7
 ```
 
-### Project Configuration
+### Configuração do Projeto
 
-**pyproject.toml** for calculator:
+**pyproject.toml** para calculadora:
 
 ```toml
 [project]
@@ -425,7 +425,7 @@ testpaths = ["tests"]
 addopts = "--cov=src/calculator --cov-report=term-missing"
 ```
 
-### IDE Setup
+### Configuração da IDE
 
 **VS Code settings.json:**
 
@@ -438,84 +438,84 @@ addopts = "--cov=src/calculator --cov-report=term-missing"
 }
 ```
 
-## 🐛 Troubleshooting
+## 🐛 Solução de Problemas
 
-### Common Issues
+### Problemas Comuns
 
-**1. "Module not found" errors:**
+**1. Erros de "Módulo não encontrado":**
 ```bash
-# Ensure you're using uv run
+# Certifique-se de usar uv run
 uv run pytest
 
-# Or activate the virtual environment
+# Ou ative o ambiente virtual
 source .venv/bin/activate
 pytest
 ```
 
-**2. Negative numbers treated as options:**
+**2. Números negativos tratados como opções:**
 ```bash
-# Use -- separator
+# Use separador --
 uv run calc add -- -5 -3
 
-# Or quote the numbers
+# Ou coloque os números entre aspas
 uv run calc add "-5" "-3"
 ```
 
-**3. Coverage not collecting data:**
+**3. Cobertura não coletando dados:**
 ```bash
-# Make sure to use uv run
+# Certifique-se de usar uv run
 cd calculator
 uv run pytest --cov=src/calculator
 
-# Check if tests are actually importing the code
+# Verifique se os testes estão realmente importando o código
 uv run pytest -v
 ```
 
-**4. GeniusTest API errors:**
+**4. Erros de API do GeniusTest:**
 ```bash
-# Check if API key is set
+# Verifique se a chave API está definida
 echo $GOOGLE_API_KEY
 
-# Verify .env file exists
+# Verifique se o arquivo .env existe
 cat .env
 ```
 
-**5. Import errors in generated tests:**
-- Generated tests include proper path setup
-- Ensure source code structure matches imports
-- Run tests with `uv run pytest`
+**5. Erros de import nos testes gerados:**
+- Testes gerados incluem configuração adequada de caminho
+- Certifique-se de que a estrutura do código fonte corresponde aos imports
+- Execute testes com `uv run pytest`
 
-### Getting Help
+### Obtendo Ajuda
 
-1. **Check logs**: Most commands provide verbose output with `-v` flag
-2. **Validate environment**: Run `uv run python -c "import calculator; print('OK')"`
-3. **Test connectivity**: Run GeniusTest with example code first
-4. **Check dependencies**: Run `uv sync` to ensure all packages are installed
+1. **Verificar logs**: A maioria dos comandos fornece saída verbosa com flag `-v`
+2. **Validar ambiente**: Execute `uv run python -c "import calculator; print('OK')"`
+3. **Testar conectividade**: Execute GeniusTest com código de exemplo primeiro
+4. **Verificar dependências**: Execute `uv sync` para garantir que todos os pacotes estão instalados
 
-### Performance Tips
+### Dicas de Performance
 
-- **Use `--write-files`** with GeniusTest for large projects to avoid console spam
-- **Run benchmark periodically** to track quality improvements
-- **Use JSON output** for automated processing in CI/CD
-- **Cache virtual environment** in CI systems for faster builds
+- **Use `--write-files`** com GeniusTest para projetos grandes para evitar spam no console
+- **Execute benchmark periodicamente** para acompanhar melhorias de qualidade
+- **Use saída JSON** para processamento automatizado em CI/CD
+- **Cache do ambiente virtual** em sistemas CI para builds mais rápidos
 
-## 📚 Additional Resources
+## 📚 Recursos Adicionais
 
-- [uv Documentation](https://docs.astral.sh/uv/)
-- [pytest Documentation](https://docs.pytest.org/)
-- [Typer Documentation](https://typer.tiangolo.com/)
-- [Google Gemini API](https://ai.google.dev/docs)
+- [Documentação do uv](https://docs.astral.sh/uv/)
+- [Documentação do pytest](https://docs.pytest.org/)
+- [Documentação do Typer](https://typer.tiangolo.com/)
+- [API do Google Gemini](https://ai.google.dev/docs)
 
 ---
 
-## 🤝 Contributing
+## 🤝 Contribuindo
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Make changes and add tests
-4. Run quality checks: `uv run python benchmark.py`
-5. Submit a pull request
+1. Faça fork do repositório
+2. Crie uma branch de feature: `git checkout -b nome-da-feature`
+3. Faça mudanças e adicione testes
+4. Execute verificações de qualidade: `uv run python benchmark.py`
+5. Submeta um pull request
 
-## 📄 License
+## 📄 Licença
 
-This project is licensed under the MIT License. See LICENSE file for details.
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para detalhes.
