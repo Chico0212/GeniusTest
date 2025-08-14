@@ -1,0 +1,18 @@
+[project]
+name = "calculator"
+version = "0.1.0"
+description = "A simple calculator CLI application using OOP"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "typer>=0.16.0",
+    "langchain>=0.1.0",
+    "langchain-google-genai>=2.0.0",
+    "pathlib",
+    "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+]
+
+[project.scripts]
+calc = "calculator.cli:app"
+genius = "calculator.genius_cli:app"
