@@ -44,7 +44,7 @@ cd multi_agents
 
 2. **Configurar ambiente:**
 ```bash
-uv sync
+uv sync # execute na raiz e em calculator
 echo "GOOGLE_API_KEY=sua_chave_api_aqui" > .env
 ```
 
