@@ -30,10 +30,25 @@ class BenchmarkAnalyzer:
         """Run pytest with coverage analysis."""
         print("🔍 Running coverage analysis...")
         
-        # Run pytest with coverage
+        # Auto-detect source structure
+        source_path = self.project_path / source_dir
+        if (source_path / "calculator").exists():
+            # Structure: src/calculator/
+            cov_target = f"{source_dir}/calculator"
+        elif source_path.exists() and any(source_path.glob("*.py")):
+            # Structure: src/ with Python files
+            cov_target = source_dir
+        else:
+            # Fallback: try to find Python package
+            cov_target = "calculator"
+        
+        print(f"📦 Coverage target: {cov_target}")
+        
+        # Run pytest with coverage using uv
         cmd = [
+            "uv", "run",
             "pytest", 
-            "--cov=" + source_dir,
+            f"--cov={cov_target}",
             "--cov-report=xml",
             "--cov-report=term-missing",
             "--cov-report=html",
